@@ -53,25 +53,6 @@
     </li>
   </ul>
 
-  <h2>📂 Project Structure</h2>
-  <pre>
-📦 RecipeExplorerApp
-├── 📂 app
-│   ├── 📂 context
-│   │   └── AppContext.tsx       <!-- Context API for state management -->
-│   ├── _layout.tsx             <!-- Root layout for navigation -->
-│   ├── HomeScreen.tsx          <!-- Main recipe listing page -->
-│   ├── RecipeDetailScreen.tsx  <!-- Recipe details page -->
-│   ├── signin.tsx              <!-- Sign In page -->
-│   ├── signup.tsx              <!-- Sign Up page -->
-├── 📂 assets                   <!-- Images and static files -->
-├── 📂 utils
-│   └── customAlerts.ts         <!-- Custom alert component -->
-├── App.tsx                     <!-- Entry point of the app -->
-├── package.json                <!-- Project metadata and dependencies -->
-├── tsconfig.json               <!-- TypeScript configuration -->
-  </pre>
-
   <h2>🌐 API Reference</h2>
   <ul>
     <li><strong>Public API Used:</strong> <a href="https://www.themealdb.com/api.php" target="_blank">TheMealDB</a></li>
