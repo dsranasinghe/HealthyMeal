@@ -15,25 +15,49 @@ export default function SignIn() {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertVisible, setAlertVisible] = useState(false);
   const router = useRouter();
+  const { setUsername } = useAppContext();
 
-const { setUsername } = useAppContext();
+  // Helper function to validate email
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation regex
+    return emailRegex.test(email);
+  };
 
-const handleLogin = () => {
-  const user = mockUsers.find((u) => u.email === email && u.password === password);
+  const handleLogin = () => {
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
 
-  if (user) {
-    setAlertMessage("Login successful");
-    setAlertVisible(true);
-    setUsername(user.username); // Update the context with the username
-    setTimeout(() => {
-      setAlertVisible(false);
-      router.push("/HomeScreen"); // Navigate without query parameters
-    }, 2000);
-  } else {
-    setAlertMessage("Login failed. Please try again.");
-    setAlertVisible(true);
-  }
-};
+    // Basic input validations
+    if (!trimmedEmail || !trimmedPassword) {
+      setAlertMessage("Email and password are required.");
+      setAlertVisible(true);
+      return;
+    }
+
+    if (!isValidEmail(trimmedEmail)) {
+      setAlertMessage("Please enter a valid email address.");
+      setAlertVisible(true);
+      return;
+    }
+
+    const user = mockUsers.find(
+      (u) => u.email === trimmedEmail && u.password === trimmedPassword
+    );
+
+    if (user) {
+      setAlertMessage("Login successful");
+      setAlertVisible(true);
+      setUsername(user.username); // Update the context with the username
+      setTimeout(() => {
+        setAlertVisible(false);
+        router.push("/HomeScreen"); // Navigate without query parameters
+      }, 2000);
+    } else {
+      setAlertMessage("Invalid email or password.");
+      setAlertVisible(true);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Hey, Welcome Back</Text>
